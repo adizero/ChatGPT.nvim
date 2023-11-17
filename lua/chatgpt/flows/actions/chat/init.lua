@@ -120,16 +120,19 @@ function ChatAction:on_result(answer, usage)
           height = ui_h,
         },
         border = {
-          style = "rounded",
-          text = {
-            top = " " .. self.opts.title .. " ",
-            top_align = "left",
-          },
+          style = "double", -- possible styles: 'none', 'single', 'double', 'rounded' (was default), 'solid', 'shadow'
+          -- popup window title cannot be set because it causes annoying anomalies while scrolling the preview window
+          -- text = {
+          --   top = " " .. self.opts.title .. " ",
+          --   top_align = "left",
+          -- },
         },
         relative = {
           type = "buf",
           position = {
-            row = start_row,
+            -- start at the bottom edge of the visual selection instead of the top edge hiding the selection
+            -- row = start_row,
+            row = end_row - 1,
             col = start_col,
           },
         },
